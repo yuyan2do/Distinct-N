@@ -1,9 +1,10 @@
+#!/usr/bin/env python3
 import argparse
 import logging
 
 from distinct_n import distinct_n_sentence_level
 from pathlib import Path
-from agenda.metric_helper import write_score
+#from agenda.metric_helper import write_score
 
 NAME = 'distinct_n'
 
@@ -17,13 +18,8 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     logging.info('loading hypothesis file...')
     with open(args.hypothesis) as f:
-        hypothesis = [sentence.split() for sentence in f.readlines()]
+        hypothesis = ' '.join([line.strip() for line in f.readlines()])
 
     output_dir = Path(args.output_dir)
     for n in args.n_range:
-        write_score(
-            name=NAME,
-            output=output_dir.joinpath(f'{NAME}_{n}').with_suffix('.json'),
-            params={'n': n},
-            scores=[distinct_n_sentence_level(s, n) for s in hypothesis],
-        )
+        print(distinct_n_sentence_level(hypothesis, n))
