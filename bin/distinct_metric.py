@@ -15,7 +15,7 @@ if __name__ == '__main__':
     parser.add_argument('--output_dir')
     args = parser.parse_args()
 
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.WARNING)
     logging.info('loading hypothesis file...')
     with open(args.hypothesis) as f:
         hypothesis = ' '.join([line.strip() for line in f.readlines()])
